@@ -9,13 +9,25 @@ import { FormsModule } from '@angular/forms';
 })
 export class Hangman {
 
-  palabras: string[] = [
-    'ANGULAR',
-    'JAVASCRIPT',
-    'TYPESCRIPT',
-    'PROGRAMACION',
-    'COMPONENTE',
-    'SERVICIO'
+  palabras = [
+    
+    { categoria: 'Programacion', palabra: 'ANGULAR' },
+    { categoria: 'Programacion', palabra: 'JAVASCRIPT' },
+    { categoria: 'Programacion', palabra: 'TYPESCRIPT' },
+    { categoria: 'Programacion', palabra: 'VARIABLE' },
+    { categoria: 'Programacion', palabra: 'ALGORITMO' },
+
+    { categoria: 'Web', palabra: 'HTML' },
+    { categoria: 'Web', palabra: 'CSS' },
+    { categoria: 'Web', palabra: 'SERVIDOR' },
+    { categoria: 'Web', palabra: 'NAVEGADOR' },
+    { categoria: 'Web', palabra: 'INTERNET' },
+
+    { categoria: 'BaseDatos', palabra: 'MYSQL' },
+    { categoria: 'BaseDatos', palabra: 'POSTGRESQL' },
+    { categoria: 'BaseDatos', palabra: 'TABLA' },
+    { categoria: 'BaseDatos', palabra: 'CONSULTA' },
+    { categoria: 'BaseDatos', palabra: 'REGISTRO' },
   ];
 
   palabraSecreta: string = '';
@@ -31,17 +43,19 @@ export class Hangman {
   juegoTerminado: boolean = false;
 
   mensaje: string = '';
+
+  categoriaActual: string = '';
   
   constructor() {
     this.seleccionarPalabra();
   }
 
   seleccionarPalabra() {
-    const indice = Math.floor(
-      Math.random() * this.palabras.length
-    );
+    const aleatorio =
+      this.palabras[Math.floor(Math.random() * this.palabras.length)];
 
-    this.palabraSecreta = this.palabras[indice];
+    this.palabraSecreta = aleatorio.palabra;
+    this.categoriaActual = aleatorio.categoria;
   }
 
   obtenerPalabraOculta(): string {
