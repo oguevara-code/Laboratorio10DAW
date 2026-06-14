@@ -45,6 +45,8 @@ export class Hangman {
   mensaje: string = '';
 
   categoriaActual: string = '';
+
+  puntaje: number = 0;
   
   constructor() {
     this.seleccionarPalabra();
@@ -99,6 +101,7 @@ export class Hangman {
 
     if (this.errores >= this.maxErrores) {
       this.juegoTerminado = true;
+      this.puntaje -= 5;
       this.mensaje = '¡Perdiste! La palabra era: ' + this.palabraSecreta;
     }
 
@@ -108,6 +111,7 @@ export class Hangman {
 
     if (gano) {
       this.juegoTerminado = true;
+      this.puntaje += 10;
       this.mensaje = '¡Ganaste!';
     }
 
