@@ -2,25 +2,57 @@
 
 <h2>{{ obtenerPalabraOculta() }}</h2>
 
-<input 
+<div class="controles">
+    <input 
     type="text"
     maxlength="1"
     [(ngModel)]="letraIngresada"
     [disabled]="juegoTerminado"
-/>
+    />
 
-<button 
-    (click)="intentarLetra()"
-    [disabled]="juegoTerminado">
-    Intentar
-</button>
+    <button 
+        (click)="intentarLetra()"
+        [disabled]="juegoTerminado">
+        Intentar
+    </button>
+</div>
 
 <p>Errores: {{ errores }}/{{ maxErrores }}</p>
+
+<div class="ahorcado">
+
+    @if (errores >= 1) {
+    <div> O </div>
+  }
+
+  @if (errores == 2) {
+    <div> | </div>
+  }
+
+  @if (errores == 3) {
+    <div>/|</div>
+  }
+
+  @if (errores >= 4) {
+    <div>/|\</div>
+  }
+
+  @if (errores == 5) {
+    <div>/ </div>
+  }
+
+  @if (errores >= 6) {
+    <div>/ \</div>
+  }
+
+</div>
 
 @if (mensaje !== '') {
     <h3>{{ mensaje }}</h3>
 }
 
-<button (click)="reiniciarJuego()">
-    Reiniciar Juego
-</button>
+<div class="reinicio">
+    <button (click)="reiniciarJuego()">
+        Reiniciar Juego
+    </button>
+</div>

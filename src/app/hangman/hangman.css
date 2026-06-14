@@ -1,0 +1,40 @@
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    letter-spacing: 10px;
+}
+
+.ahorcado {
+    margin: 20px auto;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    font-size: 40px;
+    font-family: monospace;
+}
+
+input {
+    width: 40px;
+    text-align: center;
+}
+
+p,
+h3 {
+    text-align: center;
+}
+
+.controles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.reinicio {
+    text-align: center;
+    margin-top: 15px;
+}
