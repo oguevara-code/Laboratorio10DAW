@@ -6,11 +6,21 @@
     type="text"
     maxlength="1"
     [(ngModel)]="letraIngresada"
-    
+    [disabled]="juegoTerminado"
 />
 
-<button (click)="intentarLetra()">
+<button 
+    (click)="intentarLetra()"
+    [disabled]="juegoTerminado">
     Intentar
 </button>
 
-<p>Errores: {{ errores }}</p>
+<p>Errores: {{ errores }}/{{ maxErrores }}</p>
+
+@if (mensaje !== '') {
+    <h3>{{ mensaje }}</h3>
+}
+
+<button (click)="reiniciarJuego()">
+    Reiniciar Juego
+</button>

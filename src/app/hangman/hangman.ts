@@ -25,6 +25,12 @@ export class Hangman {
   letraIngresada: string = '';
 
   errores: number = 0;
+
+  maxErrores: number = 6;
+
+  juegoTerminado: boolean = false;
+
+  mensaje: string = '';
   
   constructor() {
     this.seleccionarPalabra();
@@ -56,6 +62,10 @@ export class Hangman {
 
   intentarLetra() {
 
+    if (this.juegoTerminado) {
+      return;
+    }
+
     const letra = this.letraIngresada.toUpperCase();
 
     if (letra == '') {
@@ -73,6 +83,29 @@ export class Hangman {
       this.errores++;
     }
 
+    if (this.errores >= this.maxErrores) {
+      this.juegoTerminado = true;
+      this.mensaje = '¡Perdiste! La palabra era: ' + this.palabraSecreta;
+    }
+
+    const gano = this.palabraSecreta
+      .split('')
+      .every(letra => this.letrasAdivinadas.includes(letra));
+
+    if (gano) {
+      this.juegoTerminado = true;
+      this.mensaje = '¡Ganaste!';
+    }
+
     this.letraIngresada = '';
+  }
+
+  reiniciarJuego() {
+    this.letrasAdivinadas = [];
+    this.letraIngresada = '';
+    this.errores = 0;
+    this.juegoTerminado = false;
+    this.mensaje = '';
+    this.seleccionarPalabra();
   }
 }
