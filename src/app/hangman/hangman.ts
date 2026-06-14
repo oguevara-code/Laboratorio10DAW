@@ -6,4 +6,29 @@ import { Component } from '@angular/core';
   templateUrl: './hangman.html',
   styleUrl: './hangman.css',
 })
-export class Hangman {}
+export class Hangman {
+
+  palabras: string[] = [
+    'ANGULAR',
+    'JAVASCRIPT',
+    'TYPESCRIPT',
+    'PROGRAMACION',
+    'COMPONENTE',
+    'SERVICIO'
+  ];
+
+  palabraSecreta: string = '';
+
+  constructor() {
+    this.seleccionarPalabra();
+  }
+
+  seleccionarPalabra() {
+    const indice = Math.floor(
+      Math.random() * this.palabras.length
+    );
+
+    this.palabraSecreta = 
+      this.palabras[indice];
+  }
+}
