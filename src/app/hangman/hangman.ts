@@ -19,6 +19,8 @@ export class Hangman {
 
   palabraSecreta: string = '';
 
+  letrasAdivinadas: string[] = [];
+  
   constructor() {
     this.seleccionarPalabra();
   }
@@ -28,7 +30,22 @@ export class Hangman {
       Math.random() * this.palabras.length
     );
 
-    this.palabraSecreta = 
-      this.palabras[indice];
+    this.palabraSecreta = this.palabras[indice];
+  }
+
+  obtenerPalabraOculta(): string {
+    let resultado = '';
+
+    for (let letra of this.palabraSecreta) {
+
+      if (this.letrasAdivinadas.includes(letra)) {
+        resultado += letra + '';
+      } else {
+        resultado += '_ ';
+      }
+
+    }
+
+    return resultado;
   }
 }
