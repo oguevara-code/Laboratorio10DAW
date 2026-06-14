@@ -47,9 +47,14 @@ export class Hangman {
   categoriaActual: string = '';
 
   puntaje: number = 0;
+
+  tiempo: number = 60;
+
+  intervalo: any;
   
   constructor() {
     this.seleccionarPalabra();
+    this.iniciarTemporizador();
   }
 
   seleccionarPalabra() {
@@ -58,6 +63,26 @@ export class Hangman {
 
     this.palabraSecreta = aleatorio.palabra;
     this.categoriaActual = aleatorio.categoria;
+  }
+
+  iniciarTemporizador() {
+
+    this.intervalo = setInterval(() => {
+
+      this.tiempo--;
+
+      if (this.tiempo <= 0) {
+
+        clearInterval(this.intervalo);
+
+        this.juegoTerminado = true;
+
+        this.mensaje = '¡Tiempo agotado!';
+
+      }
+
+    }, 1000);
+
   }
 
   obtenerPalabraOculta(): string {
@@ -100,6 +125,7 @@ export class Hangman {
     }
 
     if (this.errores >= this.maxErrores) {
+      clearInterval(this.intervalo);
       this.juegoTerminado = true;
       this.puntaje -= 5;
       this.mensaje = '¡Perdiste! La palabra era: ' + this.palabraSecreta;
@@ -110,6 +136,7 @@ export class Hangman {
       .every(letra => this.letrasAdivinadas.includes(letra));
 
     if (gano) {
+      clearInterval(this.intervalo);
       this.juegoTerminado = true;
       this.puntaje += 10;
       this.mensaje = '¡Ganaste!';
@@ -119,11 +146,14 @@ export class Hangman {
   }
 
   reiniciarJuego() {
+    clearInterval(this.intervalo);
+    this.tiempo = 60;
     this.letrasAdivinadas = [];
     this.letraIngresada = '';
     this.errores = 0;
     this.juegoTerminado = false;
     this.mensaje = '';
     this.seleccionarPalabra();
+    this.iniciarTemporizador();
   }
 }
