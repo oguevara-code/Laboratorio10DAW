@@ -1,3 +1,16 @@
 <h1>Juego del Ahorcado</h1>
 
 <h2>{{ obtenerPalabraOculta() }}</h2>
+
+<input 
+    type="text"
+    maxlength="1"
+    [(ngModel)]="letraIngresada"
+    
+/>
+
+<button (click)="intentarLetra()">
+    Intentar
+</button>
+
+<p>Errores: {{ errores }}</p>

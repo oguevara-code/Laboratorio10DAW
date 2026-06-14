@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-hangman',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './hangman.html',
   styleUrl: './hangman.css',
 })
@@ -20,6 +21,10 @@ export class Hangman {
   palabraSecreta: string = '';
 
   letrasAdivinadas: string[] = [];
+
+  letraIngresada: string = '';
+
+  errores: number = 0;
   
   constructor() {
     this.seleccionarPalabra();
@@ -47,5 +52,27 @@ export class Hangman {
     }
 
     return resultado;
+  }
+
+  intentarLetra() {
+
+    const letra = this.letraIngresada.toUpperCase();
+
+    if (letra == '') {
+      return;
+    }
+
+    if (this.letrasAdivinadas.includes(letra)) {
+      this.letraIngresada = '';
+      return;
+    }
+
+    this.letrasAdivinadas.push(letra);
+
+    if (!this.palabraSecreta.includes(letra)) {
+      this.errores++;
+    }
+
+    this.letraIngresada = '';
   }
 }
